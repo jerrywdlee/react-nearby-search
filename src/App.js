@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button, Well } from 'react-bootstrap';
+import { Well } from 'react-bootstrap';
 import MyNavbar from './components/Navbar.jsx'
+import GoogleMap from './components/GoogleMap.jsx'
 
 const wellStyles = {
   height: 100+'vh',
@@ -15,9 +16,7 @@ class App extends Component {
       <div className="App">
         <MyNavbar></MyNavbar>
         <Well style={wellStyles}>
-          <p className="App-intro">
-            <Button>Bootstrapボタン</Button>
-          </p>
+          <GoogleMap></GoogleMap>
         </Well>
       </div>
     );
