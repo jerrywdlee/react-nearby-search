@@ -1,4 +1,6 @@
 /* eslint-disable */
+/* headの中に下記タグを追加する */
+/*  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places" > */
 var map;
 var infowindow;
 var service;
@@ -45,7 +47,7 @@ function createMarker(place, ifInitPoint) {
   });
 
   if (place.icon) {
-    let myIcon = new google.maps.MarkerImage(place.icon, null, null, null, new google.maps.Size(19,28));
+    let myIcon = new google.maps.MarkerImage(place.icon, null, null, null, new google.maps.Size(19,20));
     // 画像サイズ指定：http://qiita.com/tsukaguitar/items/0f0a483ab4ec32382800
     marker.setOptions({
       icon: myIcon

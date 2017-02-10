@@ -38,14 +38,18 @@ const placeTypes = [
 
 class GoogleMap extends Component {
   initMap() {
-    let location = initPoint
-    initMap(document.getElementById('map'), location)
-    getAreaName(location, (addr) => {
-      console.log(addr);
-    })
+    navigator.geolocation.getCurrentPosition((position) => {
+      let location = {lat:position.coords.latitude, lng:position.coords.longitude}
+      initMap(document.getElementById('map'), location)
+      getAreaName(location, (addr) => {
+        console.log(addr);
+      })
+    }, () => { alert("位置情報はご利用できません。") })
   }
   nearbySearch(e) {
-    alert(e.currentTarget.getAttribute('data-type'))
+    // alert(e.currentTarget.getAttribute('data-type'))
+    let locationTypes = e.currentTarget.getAttribute('data-type')
+    nearbySearch([locationTypes], 800)
     /*let locationTypes = e.currentTarget.getAttribute('data-type')
     nearbySearch([locationTypes])
     placeTypes.forEach((placeType, i)=>{
@@ -55,10 +59,10 @@ class GoogleMap extends Component {
     })*/
   }
   componentDidMount() {
-   // 描画が成功して、DOMにアクセス可能になる
-   console.log("componentDidMount");
+   // 現在のコンポネートの描画が成功して、DOMにアクセス可能になる時、マップを描画
+   this.initMap()
   }
-  
+
   render() {
     return (
       <div className='Google-map-wrapper'>
