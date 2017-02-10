@@ -79,6 +79,7 @@ class GoogleMap extends Component {
             }
           </DropdownButton>
         </ButtonGroup>
+        <p className='location-name' style={{paddingBottom:'10px'}}>現在地を取得しています</p>
         <div id="map" style={{height:'100vh',width:'100vw',marginLeft:'-19px'}}></div>
       </div>
     );
