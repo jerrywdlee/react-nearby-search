@@ -37,12 +37,24 @@ const placeTypes = [
 ];
 
 class GoogleMap extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mapLoadingMsg: "現在地を取得してください",
+      locationName : '現在地を取得しています',
+      placeType: ""
+    };
+    this.initMap = this.initMap.bind(this)
+    this.nearbySearch = this.nearbySearch.bind(this)
+  }
+
   initMap() {
     navigator.geolocation.getCurrentPosition((position) => {
       let location = {lat:position.coords.latitude, lng:position.coords.longitude}
       initMap(document.getElementById('map'), location)
       getAreaName(location, (addr) => {
         console.log(addr);
+        this.setState({locationName: addr.formatted_address});
       })
     }, () => { alert("位置情報はご利用できません。") })
   }
@@ -50,13 +62,11 @@ class GoogleMap extends Component {
     // alert(e.currentTarget.getAttribute('data-type'))
     let locationTypes = e.currentTarget.getAttribute('data-type')
     nearbySearch([locationTypes], 800)
-    /*let locationTypes = e.currentTarget.getAttribute('data-type')
-    nearbySearch([locationTypes])
     placeTypes.forEach((placeType, i)=>{
       if (placeType.id === locationTypes) {
-        this.setState({placeTypeComments: ' 付近の '+placeType.name});
+        this.setState({placeType: `付近の ${placeType.name}`});
       }
-    })*/
+    })
   }
   componentDidMount() {
    // 現在のコンポネートの描画が成功して、DOMにアクセス可能になる時、マップを描画
@@ -79,7 +89,9 @@ class GoogleMap extends Component {
             }
           </DropdownButton>
         </ButtonGroup>
-        <p className='location-name' style={{paddingBottom:'10px'}}>現在地を取得しています</p>
+        <p className='location-name' style={{paddingBottom:'10px'}}>
+          {this.state.locationName}{this.state.placeType}
+        </p>
         <div id="map" style={{height:'100vh',width:'100vw',marginLeft:'-19px'}}></div>
       </div>
     );
