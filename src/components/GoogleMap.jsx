@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, ButtonGroup, Glyphicon, DropdownButton, MenuItem } from 'react-bootstrap';
 import { initMap, getAreaName, nearbySearch } from '../helpers/GoogleMapHelper'
 
-const initPoint = {lat: 35.6795253, lng: 139.7589926}; // 東京駅
+// const initPoint = {lat: 35.6795253, lng: 139.7589926}; // 東京駅
 
 // https://developers.google.com/places/supported_types?hl=ja
 const placeTypes = [
@@ -64,7 +64,7 @@ class GoogleMap extends Component {
     nearbySearch([locationTypes], 800)
     placeTypes.forEach((placeType, i)=>{
       if (placeType.id === locationTypes) {
-        this.setState({placeType: `付近の ${placeType.name}`});
+        this.setState({placeType: `付近の${placeType.name}`});
       }
     })
   }
@@ -92,7 +92,7 @@ class GoogleMap extends Component {
         <p className='location-name' style={{paddingBottom:'10px'}}>
           {this.state.locationName}{this.state.placeType}
         </p>
-        <div id="map" style={{height:'100vh',width:'100vw',marginLeft:'-19px'}}></div>
+        <div id="map" style={{}}></div>
       </div>
     );
   }
